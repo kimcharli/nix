@@ -14,7 +14,9 @@
       # $ nix-env -qaP | grep wget
       nixpkgs.config.allowUnfree = true;
       environment.systemPackages =
-        [ pkgs.docker
+        [ 
+          # pkgs.awscli2  # flit_core>=3.7.1,<3.9.1
+          pkgs.docker
           pkgs.docker-compose
           pkgs.kubectl
           pkgs.mkalias
