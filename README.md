@@ -10,7 +10,7 @@ https://github.com/NixOS/nixpkgs
 
 https://nixos.org/download/
 ```
-sh <(curl -L https://nixos.org/nix/install)
+sudo sh <(curl -L https://nixos.org/nix/install)
 ```
 
 ```
@@ -78,6 +78,11 @@ nix-shell -p git --run 'git clone https://github.com/kimcharli/nix.git .dotfiles
 nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/sotfiles/nix/darwin#mac-mini
 
 ```
+
+# uninstall
+
+https://nix.dev/manual/nix/2.24/installation/uninstall.html#macos
+
 
 
 

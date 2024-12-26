@@ -16,9 +16,15 @@
       environment.systemPackages =
         [ pkgs.docker
           pkgs.docker-compose
-          pkgs.neovim
+          pkgs.kubectl
           pkgs.mkalias
+          pkgs.neovim
+          pkgs.nmap
           pkgs.obsidian
+          pkgs.ollama
+          pkgs.rustscan
+          pkgs.rustup
+          pkgs.stow
           pkgs.wireshark
         ];
 
