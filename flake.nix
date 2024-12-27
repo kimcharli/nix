@@ -20,13 +20,20 @@
           pkgs.docker-compose
           pkgs.kubectl
           pkgs.mkalias
+          pkgs.ncurses
           pkgs.neovim
+          pkgs.nix-tree
           pkgs.nmap
           pkgs.obsidian
           pkgs.ollama
+          # pkgs.open-webui  # pip install opentelemetry-instrumentation pgvector
+          pkgs.openssl
+          pkgs.pkg-config
+          pkgs.readline          
           pkgs.rustscan
           pkgs.rustup
           pkgs.stow
+          pkgs.tree
           pkgs.wireshark
         ];
 

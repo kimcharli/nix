@@ -4,6 +4,7 @@ https://zero-to-nix.com/
 https://wiki.nixos.org/wiki/NixOS_Wiki
 https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake#flake-format
 https://github.com/NixOS/nixpkgs
+https://search.nixos.org/packages
 
 
 # installation
@@ -61,6 +62,10 @@ or
 nix search nixpkgs tmux
 ```
 
+```
+nix-env -qaP | grep openssl
+```
+
 # Application
 
 ## colima
@@ -69,6 +74,11 @@ nix search nixpkgs tmux
 nix-shell -p colima
 ```
 
+## garbage
+
+```
+nix-collect-garbage -d
+```
 
 # recover
 
