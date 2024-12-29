@@ -22,6 +22,7 @@
           pkgs.mkalias
           pkgs.ncurses
           pkgs.neovim
+          pkgs.net-snmp
           pkgs.nix-tree
           pkgs.nmap
           pkgs.obsidian
