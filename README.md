@@ -1,5 +1,6 @@
 # nix
 
+https://nix.dev/manual/nix/2.18/introduction
 https://zero-to-nix.com/
 https://wiki.nixos.org/wiki/NixOS_Wiki
 https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake#flake-format
@@ -23,7 +24,7 @@ dry run
 nix-shell -p neofetch --run neofetch
 ```
 
-config
+first time config
 ```
 mkdir ~/.config/nix
 cd ~/.config/nix
@@ -34,10 +35,19 @@ EDIT
 nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.config/nix#mini
 ```
 
+## enable flakes in default config
+
+~/.config/nix/nix.conf 
+```
+experimental-features = nix-command flakes
+```
+
+
 on new shell
 ```
 which darwin-rebuild
 ```
+
 
 # update package
 
@@ -65,6 +75,14 @@ nix search nixpkgs tmux
 ```
 nix-env -qaP | grep openssl
 ```
+
+
+Availabe packages -- very long
+
+```
+nix-env --query --available --attr-path
+```
+
 
 # Application
 
