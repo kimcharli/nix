@@ -16,15 +16,18 @@
       environment.systemPackages =
         [ 
           # pkgs.awscli2  # flit_core>=3.7.1,<3.9.1
+          pkgs.colima
           pkgs.docker
           pkgs.docker-compose
           pkgs.kubectl
           pkgs.mkalias
+          # pkgs.mongodb
           pkgs.ncurses
           pkgs.neovim
           pkgs.net-snmp
           pkgs.nix-tree
           pkgs.nmap
+          pkgs.nodejs_23
           pkgs.obsidian
           pkgs.ollama
           # pkgs.open-webui  # pip install opentelemetry-instrumentation pgvector
