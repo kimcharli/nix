@@ -19,7 +19,9 @@
           pkgs.colima
           pkgs.docker
           pkgs.docker-compose
+          pkgs.jq
           pkgs.kubectl
+          pkgs.lua
           pkgs.mkalias
           # pkgs.mongodb
           pkgs.ncurses
