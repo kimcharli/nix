@@ -35,6 +35,7 @@
           # pkgs.open-webui  # pip install opentelemetry-instrumentation pgvector
           pkgs.openssl
           pkgs.pkg-config
+          pkgs.pyenv
           pkgs.readline          
           pkgs.rustscan
           pkgs.rustup
