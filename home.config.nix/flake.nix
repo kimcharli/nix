@@ -16,9 +16,11 @@
       environment.systemPackages =
         [ 
           # pkgs.awscli2  # flit_core>=3.7.1,<3.9.1
+          pkgs.asciinema
           pkgs.colima
           pkgs.docker
           pkgs.docker-compose
+          pkgs.graphviz
           pkgs.jq
           pkgs.kubectl
           pkgs.lua
@@ -33,15 +35,21 @@
           pkgs.obsidian
           pkgs.ollama
           # pkgs.open-webui  # pip install opentelemetry-instrumentation pgvector
-          pkgs.openssl
+          pkgs.openssl  # python requirements
           pkgs.pkg-config
           pkgs.pyenv
-          pkgs.readline          
+          pkgs.readline  # python requirements
           pkgs.rustscan
           pkgs.rustup
+          pkgs.sqlite  # python requirements
           pkgs.stow
           pkgs.tree
           pkgs.wireshark
+          pkgs.xz  # python requirements
+          pkgs.zlib  # python requirements
+          pkgs.tcl
+          # pkgs.tcl-tk@8  # python requirements
+          pkgs.uv
         ];
 
 
