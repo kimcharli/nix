@@ -49,7 +49,7 @@
           pkgs.zlib  # python requirements
           pkgs.tcl
           # pkgs.tcl-tk@8  # python requirements
-          pkgs.uv
+          # pkgs.uv  # use pip version instead
         ];
 
 
