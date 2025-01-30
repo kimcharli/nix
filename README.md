@@ -1,12 +1,93 @@
-# nix
+# Nix Development Environment
 
-https://nix.dev/manual/nix/2.18/introduction
-https://zero-to-nix.com/
-https://wiki.nixos.org/wiki/NixOS_Wiki
-https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake#flake-format
-https://github.com/NixOS/nixpkgs
-https://search.nixos.org/packages
+This repository contains my personal Nix configuration for macOS, providing a reproducible and declarative development environment. It uses `nix-darwin` to manage system configuration and packages.
 
+## Purpose
+
+- Maintain a consistent development environment across machines
+- Automate system maintenance and package management
+- Ensure reproducible builds and development setups
+- Keep system dependencies clean and organized
+
+## Features
+
+- **Automated Maintenance**:
+  - Daily garbage collection at 2 AM
+  - Automatic store optimization
+  - Clean system state management
+
+- **Development Tools**:
+  - Modern text editor (Neovim)
+  - Version control (Git, GitHub CLI)
+  - Search utilities (ripgrep, fd)
+  - Container tools (Docker, Colima)
+
+- **Programming Environments**:
+  - Python (with testing and linting tools)
+  - Node.js LTS
+  - Rust
+  - Lua
+
+- **System Utilities**:
+  - Network tools (nmap, wireshark)
+  - System monitoring
+  - Package management
+
+## Daily Activities
+
+### System Maintenance
+- Check system updates: `darwin-rebuild build --flake .#mini`
+- Apply updates: `darwin-rebuild switch --flake .#mini`
+- Manual garbage collection if needed: `nix-collect-garbage -d`
+
+### Development Workflow
+1. Start development containers: `colima start`
+2. Check Docker status: `docker ps`
+3. Update development tools: `darwin-rebuild switch --flake .#mini`
+
+### Troubleshooting
+- View system configuration: `darwin-rebuild show-config`
+- Check Nix store: `nix store verify`
+- View garbage collector status: `launchctl list | grep nix-gc`
+
+## Installation
+
+1. Install Nix:
+```bash
+sudo sh <(curl -L https://nixos.org/nix/install)
+```
+
+2. Enable flakes in `~/.config/nix/nix.conf`:
+```
+experimental-features = nix-command flakes
+```
+
+3. Initial setup:
+```bash
+mkdir ~/.config/nix
+cd ~/.config/nix
+nix flake init -t nix-darwin
+```
+
+4. Apply configuration:
+```bash
+darwin-rebuild switch --flake .#mini
+```
+
+## Useful Resources
+
+- [Nix Manual](https://nix.dev/manual/nix/2.18/introduction)
+- [Zero to Nix](https://zero-to-nix.com/)
+- [NixOS Wiki](https://wiki.nixos.org/wiki/NixOS_Wiki)
+- [Nix Packages Search](https://search.nixos.org/packages)
+- [nixpkgs Repository](https://github.com/NixOS/nixpkgs)
+
+## Maintenance Notes
+
+- Garbage collection runs automatically at 2 AM
+- System optimization runs automatically
+- Configuration changes should be committed to Git
+- Test changes with `darwin-rebuild build` before applying
 
 # installation
 
@@ -110,9 +191,3 @@ nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch 
 # uninstall
 
 https://nix.dev/manual/nix/2.24/installation/uninstall.html#macos
-
-
-
-
-
-

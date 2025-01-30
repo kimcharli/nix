@@ -10,52 +10,96 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = { pkgs, config, ... }: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+      # Enable unfree packages
       nixpkgs.config.allowUnfree = true;
-      environment.systemPackages =
-        [ 
-          # pkgs.awscli2  # flit_core>=3.7.1,<3.9.1
-          pkgs.asciinema
-          pkgs.colima
-          pkgs.docker
-          pkgs.docker-compose
-          pkgs.graphviz
-          pkgs.jq
-          pkgs.kubectl
-          pkgs.lua
-          pkgs.mkalias
-          # pkgs.mongodb
-          pkgs.ncurses
-          pkgs.neovim
-          pkgs.net-snmp
-          pkgs.nix-tree
-          pkgs.nmap
-          pkgs.nodejs_23
-          pkgs.obsidian
-          pkgs.ollama
-          # pkgs.open-webui  # pip install opentelemetry-instrumentation pgvector
-          pkgs.openssl  # python requirements
-          pkgs.pkg-config
-          pkgs.pyenv
-          pkgs.readline  # python requirements
-          pkgs.rustscan
-          pkgs.rustup
-          pkgs.sqlite  # python requirements
-          pkgs.stow
-          pkgs.tree
-          pkgs.wireshark
-          pkgs.xz  # python requirements
-          pkgs.zlib  # python requirements
-          pkgs.tcl
-          # pkgs.tcl-tk@8  # python requirements
-          # pkgs.uv  # use pip version instead
+
+      # Nix configuration
+      nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+      
+      # Automatic store optimization
+      nix.optimise.automatic = true;
+      
+      # Enable automatic garbage collection
+      nix.gc = {
+        automatic = true;
+        interval = { Hour = 2; };  # Run at 2 AM
+        options = "--delete-older-than 30d";
+      };
+
+      environment.systemPackages = with pkgs; 
+        let
+          # Python development environment
+          pythonEnv = python311.withPackages (ps: with ps; [
+            pip
+            virtualenv
+            pytest
+            black
+            flake8
+            mypy
+          ]);
+        in
+        [
+          # Development Tools
+          neovim
+          git
+          gh
+          git-lfs
+          ripgrep
+          fd
+          jq
+          tree
+          stow
+          mkalias  # Required for application setup
+
+          # Programming Languages & Runtimes
+          pythonEnv
+          nodejs_20  # LTS version
+          lua
+          rustup
+
+          # Container & Cloud Tools
+          colima
+          docker
+          docker-compose
+          kubectl
+
+          # Security & Network Tools
+          nmap
+          rustscan
+          wireshark
+
+          # System Utilities
+          asciinema
+          graphviz
+          nix-tree
+          ncurses
+          openssl
+          pkg-config
+
+          # Build Dependencies
+          readline
+          sqlite
+          xz
+          zlib
+          tcl
+
+          # GUI Applications
+          obsidian
+          
+          # AI/ML Tools
+          ollama
         ];
 
+      # Shell configuration
+      programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+        enableBashCompletion = true;
+      };
 
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
+      # Application management
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
           name = "system-applications";
@@ -76,29 +120,17 @@
           done
         '';
 
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-      programs.zsh.enable = true;
-
-      # Set Git commit hash for darwin-version.
+      # System configuration
       system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
       system.stateVersion = 5;
-
-      # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."mini" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
 
     darwinPackages = self.darwinConfigurations."mini".pkgs;
   };
-
 }
