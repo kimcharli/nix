@@ -54,6 +54,7 @@
           mkalias  # Required for application setup
 
           # Programming Languages & Runtimes
+          pyenv
           pythonEnv
           nodejs_20  # LTS version
           lua
