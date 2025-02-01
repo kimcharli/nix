@@ -2,11 +2,18 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    nodejs_20
+    pyenv
     openssl
+    xz
+    zlib
+    readline
+    sqlite
+    curl
+    libiconv
+    # nodejs_20
   ];
 
   shellHook = ''
-    export PATH="$PWD/node_modules/.bin:$PATH"
+    #export PATH="$PWD/node_modules/.bin:$PATH"
   '';
 }
