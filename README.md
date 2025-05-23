@@ -188,6 +188,26 @@ nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch 
 
 ```
 
+# update
+
+```
+sudo nix-channel --update
+```
+
 # uninstall
 
 https://nix.dev/manual/nix/2.24/installation/uninstall.html#macos
+
+# misc
+
+## nvm, node, claude code
+
+https://nodejs.org/en/download
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+nvm install node
+nvm install --lts
+
+npm install @anthropic-ai/claude-code
+```
